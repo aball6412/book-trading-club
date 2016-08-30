@@ -1,0 +1,23 @@
+{
+  "name": "book-trading-club",
+  "version": "1.0.0",
+  "description": "FCC Full Stack Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aball6412/book-trading-club.git"
+  },
+  "author": "Aaron Thompkins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aball6412/book-trading-club/issues"
+  },
+  "homepage": "https://github.com/aball6412/book-trading-club#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
