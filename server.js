@@ -26,6 +26,14 @@ app.get("/profile", function(request, response) {
     
 });
 
+app.get("/settings", function(request, response) {
+    
+    
+    response.render("settings");
+    
+    
+});
+
 
 
 
