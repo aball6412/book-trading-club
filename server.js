@@ -14,9 +14,15 @@ app.set("view engine", "ejs");
 
 app.get("/", function(request, response) {
     
-    console.log("I'm in the server");
-    
     response.render("index");
+    
+});
+
+
+app.get("/profile", function(request, response) {
+    
+    
+    response.render("profile");
     
 });
 

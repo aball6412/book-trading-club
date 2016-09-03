@@ -1,0 +1,62 @@
+.container-fluid {
+    border: solid;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    min-height: 800px;
+}
+
+.nav_bar {
+    border: solid;
+    position: relative;
+    height: 150px;
+}
+
+.title {
+
+    margin-top: 33px;
+    margin-left: 15px;
+    float: left;
+}
+
+.nav_links {
+
+    width: 250px;
+    margin-top: 47px;
+    float: right;
+}
+
+
+
+
+
+
+
+
+
+.footer {
+    border: solid;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
