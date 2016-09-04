@@ -69,17 +69,33 @@ app.get("/search_books", function(request, response) {
             //For each result get title and image and put into search results array
             for (var i in data.items) {
     
-                var title = data.items[i].volumeInfo.title;
-                var img = data.items[i].volumeInfo.imageLinks.thumbnail;
-                
-                var data_results = {
-                    title: title,
-                    img: img
+                try {
+                    
+                    var title = data.items[i].volumeInfo.title;
+                    var img = data.items[i].volumeInfo.imageLinks.thumbnail;
+
+
+                    var data_results = {
+                        title: title,
+                        img: img
+                    }
+
+                    search_results.push(data_results);
+                    
+                    
                 }
                 
-                search_results.push(data_results);
+                catch(err) {
+                    
+                    //Do nothing
+                    
+                }
                 
-            } //End for statement
+                    
+
+                
+                
+            } //End for loop
             
             
             //Send the data back to the client
