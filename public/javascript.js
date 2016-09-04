@@ -9,9 +9,12 @@ $(document).ready(function() {
         //Send search term to the server
         $.get("/search_books", { search_term: search_term }, function(data) {
             
-            //Server response data
-            console.log(data);
-            
+            //Server response data 
+            //Append each response item onto user's screen
+            for (var i in data) {
+                $(".search_results").append("<div class='search_title'><h2>" + data[i].title + "</h2></div>");
+                $(".search_results").append("<div class='search_image'><img src='" + data[i].img + "' /></div>");
+            }
             
             
             
