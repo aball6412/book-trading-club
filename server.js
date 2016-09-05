@@ -70,10 +70,8 @@ app.get("/search_books", function(request, response) {
             for (var i in data.items) {
     
                 try {
-                    
                     var title = data.items[i].volumeInfo.title;
                     var img = data.items[i].volumeInfo.imageLinks.thumbnail;
-
 
                     var data_results = {
                         title: title,
@@ -81,20 +79,14 @@ app.get("/search_books", function(request, response) {
                     }
 
                     search_results.push(data_results);
-                    
-                    
+                      
                 }
                 
                 catch(err) {
-                    
                     //Do nothing
-                    
                 }
                 
-                    
 
-                
-                
             } //End for loop
             
             
