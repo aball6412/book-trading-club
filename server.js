@@ -70,10 +70,12 @@ app.get("/search_books", function(request, response) {
             for (var i in data.items) {
     
                 try {
+                    var id = data.items[i].id;
                     var title = data.items[i].volumeInfo.title;
                     var img = data.items[i].volumeInfo.imageLinks.thumbnail;
 
                     var data_results = {
+                        id: id,
                         title: title,
                         img: img
                     }
@@ -99,6 +101,26 @@ app.get("/search_books", function(request, response) {
     
     
 }); //End /search_books endpoint
+
+
+
+app.get("/add_book", function(request, response) {
+    
+    //Get the book id
+    var book_id = request.query.book_id;
+    var img_link = request.query.img_link;
+    
+    console.log(img_link);
+    
+    //Save book id to the database
+    
+    
+    
+    response.send("Book added");
+    
+    
+    
+}); //End add book enpoint
 
 
 
