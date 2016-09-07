@@ -12,8 +12,16 @@ $(document).ready(function() {
             //Server response data 
             //Append each response item onto user's screen
             for (var i in data) {
-                $(".search_results").append("<div id='" + data[i].id + "' data-internalid='" + data[i].id + "' class='search_image col-xs-4'><img src='" + data[i].img + "' /></div>");
-                $(".search_results").append("<div data-internalid='" + data[i].id + "' class='search_title col-xs-8'><b>" + data[i].title + "<b></div>");
+                
+                var info = {
+                    id: data[i].id,
+                    title: data[i].title,
+                    img: data[i].img
+                }
+                
+                
+                $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_image col-xs-4'><img src='" + data[i].img + "' /></div>");
+                $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_title col-xs-8'><b>" + data[i].title + "<b></div>");
                 $(".search_results").append("<br />");
             }
             
@@ -32,21 +40,19 @@ $(document).ready(function() {
     //WHEN BOOK IS SELECTED
     $(".search_results").on("click", ".search_image, .search_title", function() {
         
+
+        //Get the selected book information
+        var info = $(this).data("info");
         
-        //Get the selected book id
-        var id = $(this).data("internalid");
-        var img_link = $(this).children().attr("src");
+        info = info.split(",");
         
-        
-        if (img_link === undefined) {
-            //Get image link from the sibling that has book id as it's id
-            img_link = $(this).siblings("#" + id).children().attr("src"); 
-        }
+        var id = info[0];
+        var title = info[1];
+        var img_link = info[2];
         
 
-        
         //Send info to the API
-        $.get("/add_book", { book_id: id, img_link: img_link }, function(data) {
+        $.get("/add_book", { book_id: id, book_title: title, img_link: img_link }, function(data) {
             
             
             console.log(data);

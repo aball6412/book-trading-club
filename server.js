@@ -3,6 +3,8 @@ var app = express();
 var https = require("https");
 var mongodb = require("mongodb");
 var MongoClient = mongodb.MongoClient;
+var book_collection;
+var user_collection;
 
 
 var db_url = process.env.MONGOLAB_URI || "mongodb://localhost:27017/book_trading_club";
@@ -20,6 +22,8 @@ MongoClient.connect(db_url, function(err, db) {
     }
     
     //Set up db variables
+    book_collection = db.collection("book_collection");
+    user_collection = db.collection("user_collection");
     
 }); //End db connection
 
@@ -127,14 +131,13 @@ app.get("/add_book", function(request, response) {
     
     //Get the book id
     var book_id = request.query.book_id;
+    var book_title = request.query.book_title;
     var img_link = request.query.img_link;
     
-    console.log(img_link);
     
     //Save book id to the database
-    
-    
-    
+    var result = book_collection.insert({ book_id: book_id, book_title: book_title, img_link: img_link });
+
     response.send("Book added");
     
     
