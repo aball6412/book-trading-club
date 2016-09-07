@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/aball6412/book-trading-club#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mongodb": "^2.2.9"
   }
 }

@@ -1,9 +1,28 @@
 var express = require("express");
 var app = express();
 var https = require("https");
+var mongodb = require("mongodb");
+var MongoClient = mongodb.MongoClient;
 
 
+var db_url = process.env.MONGOLAB_URI || "mongodb://localhost:27017/book_trading_club";
 var port = process.env.PORT || 3000;
+
+
+//Set up MongoDB connection
+MongoClient.connect(db_url, function(err, db) {
+    
+    if (err) {
+        console.log("Unable to connect to database");
+    }
+    else {
+        console.log("Successfully connected to " + db_url);
+    }
+    
+    //Set up db variables
+    
+}); //End db connection
+
 
 
 app.use("/", express.static(__dirname + "/public"));
