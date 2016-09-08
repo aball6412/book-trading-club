@@ -27,8 +27,8 @@ $(document).ready(function() {
                 info.title = info.title.replace(/,/g, "");
 
 
-                $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_image col-xs-4'><img src='" + data[i].img + "' /></div>");
-                $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_title col-xs-8'><b>" + data[i].title + "<b></div>");
+                $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_image col-xs-4'><img src='" + info.img + "' /></div>");
+                $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_title col-xs-8'><b>" + info.title + "<b></div>");
                 $(".search_results").append("<br />");
             }
             
@@ -64,8 +64,17 @@ $(document).ready(function() {
         //Send info to the API
         $.get("/add_book", { book_id: id, book_title: title, img_link: img_link }, function(data) {
             
+            if (data === "Success") {
+                
+                //If successfully added book then clear search field
+                $(".search_results").html("");
+                
+                //Display only the book that was added
+                $(".selection").append("<div data-info='" + id + "," + title + "," + img_link + "' class='search_image col-xs-4'><img src='" + img_link + "' /></div>");
+                $(".selection").append("<div data-info='" + id + "," + title + "," + img_link + "' class='search_title col-xs-8'><b>" + title + "<b></div>");
+            }
             
-            console.log(data);
+            
             
         }); //End get request
         

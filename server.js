@@ -168,9 +168,20 @@ app.get("/add_book", function(request, response) {
     
     
     //Save book id to the database
-    var result = book_collection.insert({ book_id: book_id, book_title: book_title, img_link: img_link });
+    var result = book_collection.insert({ book_id: book_id, book_title: book_title, img_link: img_link }, function(err, results) {
+        
+        if (err) throw err;
+        
+        else { 
+            response.send("Success");   
+        }
+       
+        
+        
+    });
 
-    response.send("Book added");
+
+    
     
     
     
