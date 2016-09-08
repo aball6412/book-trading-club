@@ -6,6 +6,9 @@ $(document).ready(function() {
         //Get the search term
         var search_term = $(".search_term").val();
         
+        //Clear any previous search results
+        $(".search_results").html("");
+        
         //Send search term to the server
         $.get("/search_books", { search_term: search_term }, function(data) {
             
@@ -19,7 +22,11 @@ $(document).ready(function() {
                     img: data[i].img
                 }
                 
-                
+                //If title has a single quote in it then escape it with xml
+                info.title = info.title.replace(/'/g, "&#39;");
+                info.title = info.title.replace(/,/g, "");
+
+
                 $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_image col-xs-4'><img src='" + data[i].img + "' /></div>");
                 $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_title col-xs-8'><b>" + data[i].title + "<b></div>");
                 $(".search_results").append("<br />");
@@ -28,9 +35,7 @@ $(document).ready(function() {
             
             
         }); //End get request
-        
-        
-        
+
         
     }); //End search books click
     
@@ -44,11 +49,16 @@ $(document).ready(function() {
         //Get the selected book information
         var info = $(this).data("info");
         
+
+        
         info = info.split(",");
         
         var id = info[0];
         var title = info[1];
         var img_link = info[2];
+        
+        console.log(info);
+        console.log(img_link);
         
 
         //Send info to the API

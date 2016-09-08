@@ -11,6 +11,9 @@ var db_url = process.env.MONGOLAB_URI || "mongodb://localhost:27017/book_trading
 var port = process.env.PORT || 3000;
 
 
+
+
+
 //Set up MongoDB connection
 MongoClient.connect(db_url, function(err, db) {
     
@@ -29,6 +32,8 @@ MongoClient.connect(db_url, function(err, db) {
 
 
 
+
+//Server static files and set view engine
 app.use("/", express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
@@ -38,7 +43,34 @@ app.set("view engine", "ejs");
 //PAGE API END POINTS
 app.get("/", function(request, response) {
     
-    response.render("index");
+    var book_list = [];
+    
+    book_collection.find().toArray(function(err, documents) {
+        
+        for (var i in documents) {
+            
+            var id = documents[i].book_id;
+            var title = documents[i].book_title;
+            var img_link = documents[i].img_link;
+            
+            var books = {
+                id: id,
+                title: title,
+                img_link: img_link
+            }
+            
+            book_list.push(books);
+            
+        } //End for loop
+        
+        
+        response.render("index", { book_list: book_list });
+        
+    });
+    
+    
+    
+    
     
 });
 
