@@ -27,8 +27,8 @@ $(document).ready(function() {
                 info.title = info.title.replace(/,/g, "");
 
 
-                $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_image col-xs-4'><img src='" + info.img + "' /></div>");
-                $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_title col-xs-8'><b>" + info.title + "<b></div>");
+                $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_image col-xs-2'><img src='" + info.img + "' height='50' width='50' /></div>");
+                $(".search_results").append("<div data-info='" + info.id + "," + info.title + "," + info.img + "' class='search_title col-xs-10'><p><b>" + info.title + "<b></p></div>");
                 $(".search_results").append("<br />");
             }
             
