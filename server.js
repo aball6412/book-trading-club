@@ -1,8 +1,17 @@
+//Initialpp
 var express = require("express");
 var app = express();
 var https = require("https");
 var mongodb = require("mongodb");
 var MongoClient = mongodb.MongoClient;
+
+//Passport
+var passport = require("passport");
+var Strategy = require("passport-twitter").Strategy;
+var bodyparser = require("body-parser");
+var cookieparser = require("cookie-parser");
+
+//Mongo Collections
 var book_collection;
 var user_collection;
 
@@ -32,6 +41,77 @@ MongoClient.connect(db_url, function(err, db) {
 
 
 
+//Set up Passport Twitter Login Strategy
+//Will be re-using my Twitter Voting App credentials
+passport.use(new Strategy(
+    {
+        consumerKey: process.env.TWITTER_KEY,
+        consumerSecret: process.env.TWITTER_SECRET,
+        //callbackURL: "<PRODUCTION URL>"
+        //Use below for development
+        callbackURL: "http://localhost:3000/login/twitter/return"
+        
+    }, function(token, tokenSecret, profile, cb) {
+        
+        //Once user successfully logs on, query database to see if user already has profile
+        //If they do not then create one
+        
+        var user = user_collection.find({ user_id: profile.id }).toArray(function(err, documents) {
+
+            if(err) throw err;
+            
+            //If there are no results found then create new profile in database
+            if(documents.length === 0) {
+                
+                user_collection.insert({ name: profile.displayName, user_id: profile.id, city: "", state: "" });
+                
+            }
+            
+        }); //End database find query
+        
+        
+        return cb(null, profile);
+    
+        
+}));
+
+
+
+//Serialize User
+//Which means we only save/remember a piece of the user profile and use that piece to reconstruct profile later
+passport.serializeUser(function(user, cb) {
+    cb(null, user.id);
+});
+
+//Deserialize User
+//Here we take the part of profile that we remembered (userid usually) and search our database with it. 
+//Once we find a match then we can pull the rest of the profile from our database
+passport.deserializeUser(function(obj, cb) {
+    
+    
+    user_collection.find({ user_id: obj }).toArray(function(err, documents) {
+        
+        name = documents[0].name;
+        user_id = documents[0].user_id;
+
+    });
+    
+    cb(null, obj); 
+});
+
+
+//Create all of the middleware needed for passport
+//app.use(require("morgan")("combined"));
+app.use(bodyparser.urlencoded({extended: false}));
+app.use(cookieparser());
+app.use(require("express-session")({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+
+//Initialize passport session
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 
 //Server static files and set view engine
 app.use("/", express.static(__dirname + "/public"));
@@ -42,6 +122,18 @@ app.set("view engine", "ejs");
 
 //PAGE API END POINTS
 app.get("/", function(request, response) {
+    
+    
+    //If user is logged in then tell EJS "yes" else, "no"
+    if (request.user) { 
+        var login = "yes";
+    }
+    
+    else {
+        var login = "no";
+    }
+    
+    
     
     var book_list = [];
     
@@ -64,7 +156,7 @@ app.get("/", function(request, response) {
         } //End for loop
         
         
-        response.render("index", { book_list: book_list });
+        response.render("index", { book_list: book_list, login: login });
         
     });
     
@@ -180,12 +272,44 @@ app.get("/add_book", function(request, response) {
         
     });
 
+}); //End add book endpoint
 
+
+
+
+app.get("/login/twitter", function(request, response) {
     
+
+    passport.authenticate("twitter")(request, response);
     
+});
     
+
+
+app.get("/login/twitter/return", passport.authenticate("twitter", { failureRedirect: "/" }), function(request, response) { 
     
-}); //End add book enpoint
+    //Retreive user query and redirect to the /searchapi to run search again before serving page back to user
+    var userSearch = request.session.query;
+    
+    if (userSearch) {
+        response.redirect("/searchapi?repop=yes&query=" + request.session.query); 
+    }
+    
+    else {
+        response.redirect("/");
+    }
+    
+});
+
+
+
+app.get("/logout", function(request, response) {
+    
+    console.log("Logging out...");
+    request.logout();
+    response.redirect("/");
+       
+});
 
 
 
