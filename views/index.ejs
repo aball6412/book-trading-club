@@ -19,9 +19,10 @@
         
         <% for (var i in book_list) { %>
 
-        
-            <img src="<%= book_list[i].img_link %>" />
-            <p><%= book_list[i].title %></p>
+            <div class="book col-xs-3">
+                <img src="<%= book_list[i].img_link %>" />
+                <p><%= book_list[i].title %></p>
+            </div>
 
         <% } %>
 
