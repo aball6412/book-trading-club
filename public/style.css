@@ -21,7 +21,7 @@
 
 .nav_links {
 
-    width: 250px;
+    width: 400px;
     margin-top: 47px;
     float: right;
 }
@@ -35,6 +35,10 @@
 
 
 /***** PROFILE PAGE STYLING ****/
+
+.user_information {
+    border: solid;
+}
 
 .book_search {
 

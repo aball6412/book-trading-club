@@ -169,15 +169,55 @@ app.get("/", function(request, response) {
 
 app.get("/profile", function(request, response) {
     
+    var name;
+    var city;
+    var state;
     
-    response.render("profile");
+    //If user is logged in then tell EJS "yes" else, "no"
+    if (request.user) { 
+        
+        var user_id = request.user;
+        
+        //Set login to yes
+        var login = "yes";
+        
+        //Get user information from the database
+        user_collection.find({ user_id: user_id }).toArray(function(err, documents) {
+            
+            name = documents[0].name;
+            city = documents[0].city;
+            state = documents[0].state;
+            
+            response.render("profile", { login: login, name: name, city: city, state: state });
+            
+        });
+        
+    }
+    
+    else {
+        var login = "no";
+        
+        response.render("profile", { login: login, name: name, city: city, state: state });
+    }
+    
+
+    
+    
     
 });
 
 app.get("/settings", function(request, response) {
     
+    //If user is logged in then tell EJS "yes" else, "no"
+    if (request.user) { 
+        var login = "yes";
+    }
     
-    response.render("settings");
+    else {
+        var login = "no";
+    }
+    
+    response.render("settings", { login: login });
     
     
 });
