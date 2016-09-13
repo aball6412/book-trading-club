@@ -37,8 +37,27 @@
 /***** PROFILE PAGE STYLING ****/
 
 .user_information {
-    border: solid;
+
 }
+
+.edit_info {
+    color: red;
+    cursor: pointer;
+}
+
+.name, .city, .state {
+    border: solid;
+    border-width: 1px;
+    padding: 5px;
+    height: 50px;
+}
+
+.cancel {
+    color: grey;
+    cursor: pointer;
+}
+
+
 
 .book_search {
 

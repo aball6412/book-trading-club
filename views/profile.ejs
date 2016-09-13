@@ -11,9 +11,41 @@
             
             <div class="user_information col-xs-3 col-xs-offset-1">
                 
-                <p>Name: <%= name %></p>
-                <p>City: <%= city %></p>
-                <p>State: <%= state %></p>
+                <div class="name">
+                    <strong>Name: </strong><span class="info_name"><%= name %></span><br />
+                </div>
+                
+                <% if (city) { %>
+                    <div class="city">
+                        <strong>City: </strong><p class="info_city"><%= city %></p><br />
+                    </div>
+                    
+                <% } else { %>
+                    <div class="city">
+                        <strong>City: </strong><span class="edit_info">Add Info</span><br />
+                    </div>
+                    
+                <% } %>
+                
+                <% if (state) { %>
+                    <div class="state">
+                        <strong>State: </strong><p class="info_state"><%= state %></p>
+                    </div>
+                    
+                <% } else { %>
+                    <div class="state">
+                        <p><strong>State: </strong><span class="edit_info">Add Info</span>
+                    </div>
+                    
+                <% } %>
+                
+                <br />
+                <div class="info_button">
+                    <button type="button" class="btn btn-primary edit_button">Edit</button>
+                </div>
+                
+                
+
             
             </div>
         

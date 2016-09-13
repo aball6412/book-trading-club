@@ -79,9 +79,51 @@ $(document).ready(function() {
         }); //End get request
         
         
-        
-        
     }); //End search results click
+    
+    
+    
+    
+    //PROFILE SECTION
+    
+    $(".edit_button, .edit_info").click(function() {
+        
+        
+        var name = $(".info_name").html();
+        var city = $(".info_city").html();
+        var state = $(".info_state").html();
+        
+        $(".name").html("<input type='text' name='user_name' value='" + name + "' />");
+        
+        if (city === undefined) {
+            $(".city").html("<input type='text' name='user_name' placeholder='Enter City' />");
+        }
+        else {
+            $(".city").html("<input type='text' name='user_name' value='" + city + "' />");  
+        }
+        
+        
+        if (state === undefined) {
+            $(".state").html("<input type='text' name='user_name' placeholder='Enter State' />");
+            
+        }
+        else {
+            $(".state").html("<input type='text' name='user_name' value='" + state + "' />");
+        }
+        
+        
+        $(".info_button").html("<button type='button' class='btn btn-success submit_button'>Submit</button><span class='cancel'> Cancel</span>");
+
+        
+    });
+    
+    
+    //When user chooses to cancel editing
+    $(".info_button").on("click", ".cancel", function() {
+        
+        console.log("I'm going to cancel editing");
+        
+    });
     
     
     

@@ -197,7 +197,8 @@ app.get("/profile", function(request, response) {
     else {
         var login = "no";
         
-        response.render("profile", { login: login, name: name, city: city, state: state });
+        response.redirect("/");
+        //response.render("profile", { login: login, name: name, city: city, state: state });
     }
     
 
