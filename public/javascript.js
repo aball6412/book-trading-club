@@ -103,7 +103,14 @@ $(document).ready(function() {
         original_info.city = city;
         original_info.state = state;
         
-        $(".name").html("<input type='text' class='user_name' value='" + name + "' />");
+        if (name === undefined) {
+            
+            $(".name").html("<input type='text' class='user_name' placeholder='Enter Name' />");
+        }
+        else {
+            $(".name").html("<input type='text' class='user_name' value='" + name + "' />");
+        }
+        
         
         if (city === undefined) {
             $(".city").html("<input type='text' class='user_city' placeholder='Enter City' />");
@@ -138,7 +145,7 @@ $(document).ready(function() {
     
         //Put city back
         if (original_info.city) {
-            $(".city").html("strong>Name: </strong><span class='info_name'>" + original_info.city + "</span><br />");
+            $(".city").html("<strong>Name: </strong><span class='info_city'>" + original_info.city + "</span><br />");
         }
         else {
             $(".city").html("<strong>City: </strong><span class='edit_info'>Add Info</span><br />");
@@ -147,7 +154,7 @@ $(document).ready(function() {
         
         //Put state back
         if (original_info.state) {
-            $(".state").html("strong>Name: </strong><span class='info_name'>" + original_info.state + "</span><br />");
+            $(".state").html("<strong>Name: </strong><span class='info_state'>" + original_info.state + "</span><br />");
         }
         else {
             $(".state").html("<p><strong>State: </strong><span class='edit_info'>Add Info</span>");
