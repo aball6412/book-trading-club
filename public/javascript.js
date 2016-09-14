@@ -163,11 +163,13 @@ $(document).ready(function() {
     $(".info_button").on("click", ".submit_button", function() {
         
         //Get user information
+        var user_id = $(".name").data("userid");
         var name = $(".user_name").val();
         var city = $(".user_city").val();
         var state = $(".user_state").val();
         
         var user_data = {
+            user_id: user_id,
             name: name,
             city: city,
             state: state
@@ -178,7 +180,12 @@ $(document).ready(function() {
         //Make http request to server
         $.get("/userupdate", user_data, function(data) {
             
-            console.log(data);
+            if (data === "Success") {
+                location.reload();
+            }
+            else {
+                console.log("There was an error");
+            }
             
             
             

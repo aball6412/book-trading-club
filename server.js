@@ -188,7 +188,7 @@ app.get("/profile", function(request, response) {
             city = documents[0].city;
             state = documents[0].state;
             
-            response.render("profile", { login: login, name: name, city: city, state: state });
+            response.render("profile", { login: login, user_id: user_id, name: name, city: city, state: state });
             
         });
         
@@ -319,17 +319,32 @@ app.get("/add_book", function(request, response) {
 
 app.get("/userupdate", function(request, response) {
     
-    console.log(request.query);
+    //Get user variables
+    var user_id = request.query.user_id;
     var name = request.query.name;
     var city = request.query.city;
     var state = request.query.state;
     
-    console.log(name);
-    console.log(city);
-    console.log(state);
+
+    //Save information to the database
+    var result = user_collection.find({ user_id: user_id }).toArray(function(err, results) {
+        
+        //If there is one result
+        if (results.length === 1) {
+            
+            user_collection.update({ user_id: user_id }, { $set: { name: name, user_id: user_id, city: city, state: state } }, function(err, submit_results) {
+                
+                if (err) throw err;
+                
+                else {
+                    response.send("Success");
+                }
+                
+            });
+        }
+        
+    });
     
-    
-    response.send("Success");
     
 });
 
