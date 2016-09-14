@@ -317,6 +317,23 @@ app.get("/add_book", function(request, response) {
 
 
 
+app.get("/userupdate", function(request, response) {
+    
+    console.log(request.query);
+    var name = request.query.name;
+    var city = request.query.city;
+    var state = request.query.state;
+    
+    console.log(name);
+    console.log(city);
+    console.log(state);
+    
+    
+    response.send("Success");
+    
+});
+
+
 
 app.get("/login/twitter", function(request, response) {
     

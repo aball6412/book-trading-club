@@ -57,8 +57,6 @@ $(document).ready(function() {
         var title = info[1];
         var img_link = info[2];
         
-        console.log(info);
-        console.log(img_link);
         
 
         //Send info to the API
@@ -85,30 +83,42 @@ $(document).ready(function() {
     
     
     //PROFILE SECTION
+    var original_info = {
+        name: "",
+        city: "",
+        state: ""
+    }
     
-    $(".edit_button, .edit_info").click(function() {
-        
-        
+    
+    
+    $(".user_information").on("click", ".edit_button, .edit_info", function() {
+  
+        //Get variables from the page
         var name = $(".info_name").html();
         var city = $(".info_city").html();
         var state = $(".info_state").html();
         
-        $(".name").html("<input type='text' name='user_name' value='" + name + "' />");
+        //Save variables to the object
+        original_info.name = name;
+        original_info.city = city;
+        original_info.state = state;
+        
+        $(".name").html("<input type='text' class='user_name' value='" + name + "' />");
         
         if (city === undefined) {
-            $(".city").html("<input type='text' name='user_name' placeholder='Enter City' />");
+            $(".city").html("<input type='text' class='user_city' placeholder='Enter City' />");
         }
         else {
-            $(".city").html("<input type='text' name='user_name' value='" + city + "' />");  
+            $(".city").html("<input type='text' class='user_city' value='" + city + "' />");
         }
         
         
         if (state === undefined) {
-            $(".state").html("<input type='text' name='user_name' placeholder='Enter State' />");
+            $(".state").html("<input type='text' class='user_state' placeholder='Enter State' />");
             
         }
         else {
-            $(".state").html("<input type='text' name='user_name' value='" + state + "' />");
+            $(".state").html("<input type='text' class='user_state' value='" + state + "' />");
         }
         
         
@@ -121,10 +131,68 @@ $(document).ready(function() {
     //When user chooses to cancel editing
     $(".info_button").on("click", ".cancel", function() {
         
-        console.log("I'm going to cancel editing");
+        
+        //Put name back
+        $(".name").html("<strong>Name: </strong><span class='info_name'>" + original_info.name + "</span><br />");
+        
+    
+        //Put city back
+        if (original_info.city) {
+            $(".city").html("strong>Name: </strong><span class='info_name'>" + original_info.city + "</span><br />");
+        }
+        else {
+            $(".city").html("<strong>City: </strong><span class='edit_info'>Add Info</span><br />");
+        }
+        
+        
+        //Put state back
+        if (original_info.state) {
+            $(".state").html("strong>Name: </strong><span class='info_name'>" + original_info.state + "</span><br />");
+        }
+        else {
+            $(".state").html("<p><strong>State: </strong><span class='edit_info'>Add Info</span>");
+        }
+        
+
+        //Put edit button back
+        $(".info_button").html("<button type='button' class='btn btn-primary edit_button'>Edit</button>");
         
     });
     
     
+    $(".info_button").on("click", ".submit_button", function() {
+        
+        //Get user information
+        var name = $(".user_name").val();
+        var city = $(".user_city").val();
+        var state = $(".user_state").val();
+        
+        var user_data = {
+            name: name,
+            city: city,
+            state: state
+        }
+        
+
+        
+        //Make http request to server
+        $.get("/userupdate", user_data, function(data) {
+            
+            console.log(data);
+            
+            
+            
+        });
+    });
+    
     
 }); //End document
+
+
+
+
+
+
+
+
+
