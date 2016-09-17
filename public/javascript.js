@@ -192,9 +192,7 @@ $(document).ready(function() {
             }
             else {
                 console.log("There was an error");
-            }
-            
-            
+            }    
             
         });
     });

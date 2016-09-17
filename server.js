@@ -294,14 +294,16 @@ app.get("/search_books", function(request, response) {
 
 app.get("/add_book", function(request, response) {
     
-    //Get the book id
+    //Get the book information
+    var user_id = request.user;
     var book_id = request.query.book_id;
     var book_title = request.query.book_title;
     var img_link = request.query.img_link;
     
     
+    
     //Save book id to the database
-    var result = book_collection.insert({ book_id: book_id, book_title: book_title, img_link: img_link }, function(err, results) {
+    var result = book_collection.insert({ user_id: user_id, book_id: book_id, book_title: book_title, img_link: img_link }, function(err, results) {
         
         if (err) throw err;
         
