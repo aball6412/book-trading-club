@@ -173,6 +173,12 @@ app.get("/profile", function(request, response) {
     var city;
     var state;
     
+    var user_books;
+    var user_books_list = [];
+    var book_id;
+    var book_title;
+    var img_link;
+    
     //If user is logged in then tell EJS "yes" else, "no"
     if (request.user) { 
         
@@ -184,11 +190,41 @@ app.get("/profile", function(request, response) {
         //Get user information from the database
         user_collection.find({ user_id: user_id }).toArray(function(err, documents) {
             
+            if (err) throw err;
+            
+            //Get user information
             name = documents[0].name;
             city = documents[0].city;
             state = documents[0].state;
             
-            response.render("profile", { login: login, user_id: user_id, name: name, city: city, state: state });
+            //Get books user has added
+            book_collection.find({ user_id: user_id }).toArray(function(err, documents) {
+                
+                if (err) throw err;
+                
+                if (documents.length > 0) {
+                    
+                    for (var i in documents) {
+                        
+                        user_books = {
+                            book_id: documents[i].book_id,
+                            book_title: documents[i].book_title,
+                            img_link: documents[i].image_link  
+                        }
+                        
+                        user_books_list.push(user_books);
+                    }
+                    
+                }
+                
+                
+                
+                response.render("profile", { login: login, user_id: user_id, name: name, city: city, state: state, user_books: user_books_list });
+                
+            });
+            
+            
+            
             
         });
         
