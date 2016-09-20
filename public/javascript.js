@@ -198,6 +198,43 @@ $(document).ready(function() {
     });
     
     
+    
+    
+    //PROFILE BUTTONS
+    $(".account_info_btn").click(function() {
+        
+        //Display user information div
+        $(".user_information").css("display", "block");
+        
+        //Hide user books and book search divs
+        $(".user_books").css("display", "none");
+        $(".book_search").css("display", "none");
+        
+    });
+    
+    $(".my_books_btn").click(function() {
+        
+        //Display user information div
+        $(".user_books").css("display", "block");
+        
+        //Hide user books and book search divs
+        $(".user_information").css("display", "none");
+        $(".book_search").css("display", "none");
+        
+    });
+    
+    $(".search_books_btn").click(function() {
+        
+        //Display user information div
+        $(".book_search").css("display", "block");
+        
+        //Hide user books and book search divs
+        $(".user_information").css("display", "none");
+        $(".user_books").css("display", "none");
+        
+    });
+    
+    
 }); //End document
 
 

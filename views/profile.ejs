@@ -4,12 +4,27 @@
 
     <div class="main">
 
-        <h2 class="text-center">This is my Profile</h2>
-        
+        <div class="profile_buttons col-xs-6 col-xs-offset-3">
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="account_info_btn btn btn-primary">Account Information</button>
+                </div>
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="my_books_btn btn btn-primary">My Books</button>
+                </div>
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="search_books_btn btn btn-primary">Search Books</button>
+                </div>
+
+            </div>
+        </div>
         
         <div class="row">
             
-            <div class="user_information col-xs-3 col-xs-offset-1">
+            <div class="user_information col-xs-6 col-xs-offset-3">
                 
                 <div class="name" data-userid="<%= user_id %>">
                     <strong>Name: </strong><span class="info_name"><%= name %></span><br />
@@ -50,7 +65,9 @@
             </div> <!-- end user information -->
             
             
-            <div class="user_books">
+            <div class="user_books col-xs-6 col-xs-offset-3">
+                
+                <h1>My Books</h1>
             
                 <% for (var i in user_books) { %>
     
@@ -63,7 +80,7 @@
         
             
             
-            <div class="book_search col-xs-5 col-xs-offset-1">
+            <div class="book_search col-xs-6 col-xs-offset-3">
 
                 <div class="input-group">
                     <input type="text" class="form-control search_term" placeholder="Search Books" />

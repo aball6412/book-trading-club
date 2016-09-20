@@ -35,62 +35,75 @@
 
 
 /***** PROFILE PAGE STYLING ****/
+.profile_buttons {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 .user_information {
-
+    display: none;
 }
 
-.edit_info {
-    color: red;
-    cursor: pointer;
-}
+    .edit_info {
+        color: red;
+        cursor: pointer;
+    }
+    .name, .city, .state {
+        border: solid;
+        border-width: 1px;
+        padding: 5px;
+        height: 50px;
+    }
+    .cancel {
+        color: grey;
+        cursor: pointer;
+    }
 
-.name, .city, .state {
+
+
+.user_books {
     border: solid;
-    border-width: 1px;
-    padding: 5px;
-    height: 50px;
+    display: none;
+    text-align: center;
 }
 
-.cancel {
-    color: grey;
-    cursor: pointer;
-}
 
 
 
 .book_search {
 
 }
-.search_results {
-    margin-top: 15px;
-}
-.search_title {
-    border-bottom: solid;
-    border-width: 1px;
-    font-size: 15px;
-    height: 65px;
-}
-.search_title p {
-    margin-top: 11px;
-}
-.search_image {
-    border-bottom: solid;
-    border-width: 1px;
-    padding: 0;
-    height: 65px;
 
-}
-.search_image img {
+    .search_results {
+        margin-top: 15px;
+    }
+    .search_title {
+        border-bottom: solid;
+        border-width: 1px;
+        font-size: 15px;
+        height: 65px;
+    }
+    .search_title p {
+        margin-top: 11px;
+    }
+    .search_image {
+        border-bottom: solid;
+        border-width: 1px;
+        padding: 0;
+        height: 65px;
 
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5px;
-    padding: 0;
-    height: 50px;
-    width: 50px;
-}
+    }
+    .search_image img {
+
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        padding: 0;
+        height: 50px;
+        width: 50px;
+    }
+
 
 .info:hover {
     background: red;
@@ -98,6 +111,7 @@
 
 
 
+/*****FOOTER STYLING*****/  
 .footer {
     border: solid;
     position: absolute;
