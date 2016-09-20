@@ -4,6 +4,7 @@
     padding: 0;
     margin: 0;
     min-height: 800px;
+
 }
 
 .nav_bar {
@@ -30,8 +31,46 @@
 /***** HOME PAGE STYLING ****/
 .book {
     border: solid;
-    height: 300px;
+    min-height: 300px;
 }
+
+    .book .book_image {
+        border: solid;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+        
+        .book_image img {
+            height: 168px;;
+            width: 128px;
+        }
+
+    .book .book_title {
+        border: solid;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+        line-height: 1em;
+    } 
+    .book .trade_buttons {
+        border: solid;
+        text-align: center;
+    }
+        .book .glyphicon {
+            font-size: 35px;
+            cursor: pointer;
+        }
+
+            .glyphicon-plus {
+                color: green;
+            }
+            .glyphicon-ok {
+                color: green;
+            }
+            .glyphicon-remove {
+                color: red;
+            }
 
 
 /***** PROFILE PAGE STYLING ****/
@@ -62,7 +101,6 @@
 
 
 .user_books {
-    border: solid;
     display: none;
     text-align: center;
 }

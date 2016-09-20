@@ -20,9 +20,25 @@
         <% for (var i in book_list) { %>
 
             <div class="book col-xs-3">
-                <img src="<%= book_list[i].img_link %>" />
-                <p><%= book_list[i].title %></p>
+                
+                <div class="book_image">
+                    <img src="<%= book_list[i].img_link %>" />
+                </div>
+                
+                <div class="book_title">
+                    <p><%= book_list[i].title %></p>
+                </div>
+                
+                
+                <div class="trade_buttons">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <i class="glyphicon glyphicon-ok"></i>
+                    <i class="glyphicon glyphicon-remove"></i>
+                </div>
+                
             </div>
+        
+            
 
         <% } %>
 
