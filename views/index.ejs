@@ -17,6 +17,7 @@
 
         <h2>Books Added By Our Users</h2>
         
+        
         <% for (var i in book_list) { %>
 
             <div class="book col-xs-3">
@@ -31,10 +32,18 @@
                 
                 
                 <div class="trade_buttons">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    <i class="glyphicon glyphicon-ok"></i>
-                    <i class="glyphicon glyphicon-remove"></i>
+                    <% if (user === book_list[i].book_uploader) { %>
+                        <i class="glyphicon glyphicon-remove" data-bookid="<%= book_list[i].id %>"></i>
+                    <% } %>
+
+                    <% if (user !== book_list[i].book_uploader) { %>
+                        <i class="glyphicon glyphicon-plus" data-bookid="<%= book_list[i].id %>"></i>
+                    <% } %>
                 </div>
+            
+                    
+<!--                    <i class="glyphicon glyphicon-ok"></i>-->
+
                 
             </div>
         

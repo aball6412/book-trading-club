@@ -123,7 +123,7 @@ app.set("view engine", "ejs");
 //PAGE API END POINTS
 app.get("/", function(request, response) {
     
-    
+    var user = request.user;
     //If user is logged in then tell EJS "yes" else, "no"
     if (request.user) { 
         var login = "yes";
@@ -141,11 +141,13 @@ app.get("/", function(request, response) {
         
         for (var i in documents) {
             
+            var book_uploader = documents[i].user_id;
             var id = documents[i].book_id;
             var title = documents[i].book_title;
             var img_link = documents[i].img_link;
             
             var books = {
+                book_uploader: book_uploader,
                 id: id,
                 title: title,
                 img_link: img_link
@@ -156,7 +158,7 @@ app.get("/", function(request, response) {
         } //End for loop
         
         
-        response.render("index", { book_list: book_list, login: login });
+        response.render("index", { user: user, book_list: book_list, login: login });
         
     });
     
@@ -383,6 +385,16 @@ app.get("/userupdate", function(request, response) {
         
     });
     
+    
+});
+
+
+app.get("/tradebook", function(request, response) {
+    
+    var book = request.query.book;
+    
+    
+    response.send("Success: " + book);
     
 });
 

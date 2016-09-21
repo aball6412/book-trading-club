@@ -235,6 +235,32 @@ $(document).ready(function() {
     });
     
     
+    
+    
+    //Homepage Trading Books
+    $(".glyphicon-plus").click(function() {
+        
+        console.log("Trade for this book");
+        
+        var book = $(this).data();
+        book = book.bookid;
+        
+        $.get("/tradebook", { book: book }, function(data) {
+            
+            console.log(data);
+        });
+    });
+    
+    
+    $(".glyphicon-remove").click(function() {
+        
+        console.log("Remove this book");
+    });
+    
+    
+    
+    
+    
 }); //End document
 
 
