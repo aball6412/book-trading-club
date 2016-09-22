@@ -240,12 +240,20 @@ $(document).ready(function() {
     //Homepage Trading Books
     $(".glyphicon-plus").click(function() {
         
-        console.log("Trade for this book");
+        var trade_data = $(this).data();
         
-        var book = $(this).data();
-        book = book.bookid;
+        var book = trade_data.bookid;
+        var trade_requester = trade_data.userid;
         
-        $.get("/tradebook", { book: book }, function(data) {
+        
+        var trade_request = {
+            trade_requester: trade_requester,
+            book: book 
+        }
+
+        
+        
+        $.get("/tradebook", trade_request, function(data) {
             
             console.log(data);
         });

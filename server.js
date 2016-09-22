@@ -392,9 +392,19 @@ app.get("/userupdate", function(request, response) {
 app.get("/tradebook", function(request, response) {
     
     var book = request.query.book;
+    var trade_requester = request.query.trade_requester;
+    
+    book_collection.update({ book_id: book }, { $set: { trade_requester: trade_requester } }, function(err, results) {
+        
+        if (err) throw err;
+        
+        else {
+            response.send("Success");
+        }
+        
+    });
     
     
-    response.send("Success: " + book);
     
 });
 
