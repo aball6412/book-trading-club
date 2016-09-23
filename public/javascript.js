@@ -245,18 +245,33 @@ $(document).ready(function() {
         var book = trade_data.bookid;
         var trade_requester = trade_data.userid;
         
+        var this_book = $(this).parent();
         
-        var trade_request = {
-            trade_requester: trade_requester,
-            book: book 
+        if (trade_requester === " ") {
+            $(this).parent().append("<p style='color: red'>Please login to trade books.</p>");
         }
-
         
-        
-        $.get("/tradebook", trade_request, function(data) {
+        else {
             
-            console.log(data);
-        });
+            //Make the trade request object
+            var trade_request = {
+                trade_requester: trade_requester,
+                book: book 
+            }
+ 
+            //Make get request to the API
+            $.get("/tradebook", trade_request, function(data) {
+
+                console.log(data);
+                if (data === "Success") {
+                    $(this_book).html("<p style='color: green'>Trade Request Sent!</p>");
+                }
+                else {
+                    $(this_book).html("<p>Error, please try again.</p>");
+                }
+            });
+        }
+        
     });
     
     
