@@ -278,6 +278,13 @@ $(document).ready(function() {
     $(".glyphicon-remove").click(function() {
         
         console.log("Remove this book");
+        
+        //Make API request to remove the book that user added.
+        $.get("/removebook", function(data) {
+            
+            console.log(data);
+            
+        });
     });
     
     

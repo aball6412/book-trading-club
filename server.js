@@ -408,6 +408,13 @@ app.get("/tradebook", function(request, response) {
     
 });
 
+app.get("/removebook", function(request, response) {
+    
+    
+    response.send("Success");
+    
+});
+
 
 
 app.get("/login/twitter", function(request, response) {
