@@ -33,6 +33,10 @@
     border: solid;
     min-height: 300px;
 }
+.book:last-child {
+    margin-bottom: 100px;
+    clear: right;
+}
 
     .book .book_image {
         border: solid;
