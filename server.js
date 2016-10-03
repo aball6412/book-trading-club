@@ -410,8 +410,19 @@ app.get("/tradebook", function(request, response) {
 
 app.get("/removebook", function(request, response) {
     
+    var book_id = request.query.book_id;
+    var user_id = request.user;
     
-    response.send("Success");
+    book_collection.remove({ user_id: user_id, book_id: book_id }, function(err, results) {
+        
+        if (err) throw err;
+        
+        else {
+            response.send("Success");
+        }
+        
+    });
+    
     
 });
 

@@ -277,10 +277,16 @@ $(document).ready(function() {
     
     $(".glyphicon-remove").click(function() {
         
-        console.log("Remove this book");
+        //Get the book id and user id to delete book
+        var book_id = $(this).data("bookid");
+        
+        var delete_request = {
+            book_id: book_id
+        }
+
         
         //Make API request to remove the book that user added.
-        $.get("/removebook", function(data) {
+        $.get("/removebook", delete_request, function(data) {
             
             console.log(data);
             
