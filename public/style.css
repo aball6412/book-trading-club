@@ -61,8 +61,12 @@
         border: solid;
         text-align: center;
     }
+        .trade_buttons p {
+            display: inline-block;
+            cursor: pointer;
+        }
         .book .glyphicon {
-            font-size: 35px;
+            font-size: 20px;
             cursor: pointer;
         }
 
@@ -73,6 +77,9 @@
                 color: green;
             }
             .glyphicon-remove {
+                position: relative;
+                top: 5px;
+                margin-right: 5px;
                 color: red;
             }
 

@@ -33,7 +33,7 @@
                 
                 <div class="trade_buttons">
                     <% if (user === book_list[i].book_uploader) { %>
-                        <i class="glyphicon glyphicon-remove" data-bookid="<%= book_list[i].id %>"></i>
+                        <i class="glyphicon glyphicon-remove" data-bookid="<%= book_list[i].id %>"></i><p class="remove_book">Remove book</p>
                     <% } %>
 
                     <% if (user !== book_list[i].book_uploader) { %>
@@ -42,7 +42,7 @@
                 </div>
             
                     
-<!--                    <i class="glyphicon glyphicon-ok"></i>-->
+
 
                 
             </div>

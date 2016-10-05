@@ -275,20 +275,29 @@ $(document).ready(function() {
     });
     
     
-    $(".glyphicon-remove").click(function() {
+    $(".glyphicon-remove, .remove_book").click(function() {
         
         //Get the book id and user id to delete book
-        var book_id = $(this).data("bookid");
+        var book_id = $(this).data("bookid") || $(this).siblings(".glyphicon-remove").data("bookid");
         
         var delete_request = {
-            book_id: book_id
+            book_id: book_id,
         }
 
+        var element = this;
+        
         
         //Make API request to remove the book that user added.
         $.get("/removebook", delete_request, function(data) {
             
             console.log(data);
+            
+            if (data === "Success") {
+                $(element).parent().parent().remove();
+            }
+            else {
+                $(element).append("Error");
+            }
             
         });
     });

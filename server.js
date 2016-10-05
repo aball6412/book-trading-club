@@ -145,12 +145,15 @@ app.get("/", function(request, response) {
             var id = documents[i].book_id;
             var title = documents[i].book_title;
             var img_link = documents[i].img_link;
+            var trade_requester = documents[i].trade_requester;
             
+
             var books = {
                 book_uploader: book_uploader,
                 id: id,
                 title: title,
-                img_link: img_link
+                img_link: img_link,
+                trade_requester: trade_requester
             }
             
             book_list.push(books);
