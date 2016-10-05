@@ -136,6 +136,9 @@ app.get("/", function(request, response) {
     
     
     var book_list = [];
+    var my_trades = [];
+    var trades_to_me = [];
+    var trades = {};
     
     book_collection.find().toArray(function(err, documents) {
         
@@ -161,7 +164,20 @@ app.get("/", function(request, response) {
         } //End for loop
         
         
-        response.render("index", { user: user, book_list: book_list, login: login });
+        for (var i in book_list) {
+            
+            if (book_list[i].trade_requester === user && user != undefined) {
+                my_trades.push(book_list[i]);
+            }
+            else if (book_list[i].trade_requester && book_list[i].book_uploader === user) {
+                trades_to_me.push(book_list[i]);
+            }
+        }
+        
+        trades.my_trades = my_trades;
+        trades.trades_to_me = trades_to_me;
+        
+        response.render("index", { user: user, trades: trades, book_list: book_list, login: login });
         
     });
     

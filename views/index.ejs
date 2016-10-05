@@ -14,6 +14,16 @@
             
 
     <div class="main">
+        
+        
+        <% if (login === "yes") { %>
+        
+            <p>Trades Requested: <%= trades.my_trades.length %></p>
+            <p>Trades Received: <%= trades.trades_to_me.length %></p>
+        
+        <% } %>
+        
+        
 
         <h2>Books Added By Our Users</h2>
         
@@ -37,8 +47,9 @@
                     <% } %>
 
                     <% if (user !== book_list[i].book_uploader) { %>
-                        <i class="glyphicon glyphicon-plus" data-userid="<%= user %> "data-bookid="<%= book_list[i].id %>"></i>
+                        <i class="glyphicon glyphicon-plus" data-userid="<%= user %>" data-bookid="<%= book_list[i].id %>"></i>
                     <% } %>
+                    
                 </div>
             
                     
