@@ -303,6 +303,38 @@ $(document).ready(function() {
     });
     
     
+    $(".accept_trade").click(function() {
+        
+        var book_uploader = $(".accept_trade").data("uploader");
+        var book_id = $(".accept_trade").data("bookid");
+        
+        var book_info = {
+            book_uploader: book_uploader,
+            book_id: book_id
+        }
+        
+        $.get("/acceptTrade", book_info, function(data) {
+            
+            console.log(data);
+        });
+        
+    }); 
+    $(".reject_trade").click(function() {
+        
+        var book_uploader = $(".reject_trade").data("uploader");
+        var book_id = $(".reject_trade").data("bookid");
+        
+        var book_info = {
+            book_uploader: book_uploader,
+            book_id: book_id
+        }
+        
+        $.get("/acceptTrade", book_info, function(data) {
+            
+            console.log(data);
+        });
+        
+    });
     
     
     

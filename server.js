@@ -446,6 +446,19 @@ app.get("/removebook", function(request, response) {
 });
 
 
+app.get("/acceptTrade", function(request, response) {
+    
+    var book_id = request.query.book_id;
+    var book_uploader = request.query.book_uploader;
+    
+    console.log(book_id);
+    console.log(book_uploader);
+    
+    response.send("Success");
+    
+});
+
+
 
 app.get("/login/twitter", function(request, response) {
     
