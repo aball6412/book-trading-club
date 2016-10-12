@@ -55,17 +55,23 @@
                 
                 <div class="trade_buttons">
                     
-                    <% if (user === book_list[i].trade_requester && login === "yes") { %>
+                    <% if (book_list[i].trade_requester === "Accepted") { %>
+                        <p>This book has been traded</p>
+                    <% }
+                    
+                    else if (user === book_list[i].trade_requester && login === "yes") { %>
                         <i class="glyphicon glyphicon-ok" data-bookid="<%= book_list[i].id %>"></i><p>Added</p>
                     <% } 
 
                     else if (user === book_list[i].book_uploader) { %>
                         <i class="glyphicon glyphicon-remove" data-bookid="<%= book_list[i].id %>"></i><p class="remove_book">Remove book</p>
                     <% } 
-
+                    
                     else { %>
+    
                         <i class="glyphicon glyphicon-plus" data-userid="<%= user %>" data-bookid="<%= book_list[i].id %>"></i>
-                    <% } %>
+    
+                   <% } %>
                     
                 </div>
             

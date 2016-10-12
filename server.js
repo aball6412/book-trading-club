@@ -163,19 +163,25 @@ app.get("/", function(request, response) {
             
         } //End for loop
         
+     
         
         for (var i in book_list) {
             
             if (book_list[i].trade_requester === user && user != undefined) {
+                console.log("first");
                 my_trades.push(book_list[i]);
             }
-            else if (book_list[i].trade_requester && book_list[i].book_uploader === user) {
+            else if (book_list[i].trade_requester != "Accepted" && book_list[i].trade_requester != "Rejected" && book_list[i].book_uploader === user) {
+                console.log("second");
                 trades_to_me.push(book_list[i]);
             }
         }
         
+
+        
         trades.my_trades = my_trades;
         trades.trades_to_me = trades_to_me;
+        
         
         response.render("index", { user: user, trades: trades, book_list: book_list, login: login });
         
@@ -448,13 +454,45 @@ app.get("/removebook", function(request, response) {
 
 app.get("/acceptTrade", function(request, response) {
     
+    //Get variables
     var book_id = request.query.book_id;
     var book_uploader = request.query.book_uploader;
     
-    console.log(book_id);
-    console.log(book_uploader);
     
-    response.send("Success");
+    //Update the database
+    book_collection.update({ book_id: book_id, user_id: book_uploader }, { $set: { trade_requester: "Accepted" } }, function(err, results) {
+        
+        if (err) throw err;
+        
+        else {
+            response.send("Success");
+        }
+        
+    });
+    
+    
+});
+
+
+app.get("/rejectTrade", function(request, response) {
+    
+    //Get variables
+    var book_id = request.query.book_id;
+    var book_uploader = request.query.book_uploader;
+    
+
+    //Update the database
+    book_collection.update({ book_id: book_id, user_id: book_uploader }, { $set: { trade_requester: "Rejected" } }, function(err, results) {
+        
+        if (err) throw err;
+        
+    
+        else {
+            response.send("Success");
+        }
+        
+    });
+    
     
 });
 
